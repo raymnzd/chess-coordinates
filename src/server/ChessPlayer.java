@@ -54,4 +54,24 @@ public class ChessPlayer {
     void send_new_coord(String coord){
         printer.println(NEW_COORD + " " + coord);
     }
+
+
+    public String test_whack(){
+        while(scanner.hasNextLine()){
+            String response = scanner.nextLine();
+            if(response.startsWith(CLICK)){
+                return response.split(" ")[1];
+            }
+        }
+        return "";
+    }
+
+    public void close() {
+        try {
+            sock.close();
+        }
+        catch(IOException ioe) {
+            // squash
+        }
+    }
 }
