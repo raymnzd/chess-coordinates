@@ -15,6 +15,8 @@ public class ChessClient {
     private Scanner networkIn;
     private PrintStream networkOut;
 
+    private ChessData data;
+
     private ChessGUI gui;
 
 
@@ -35,6 +37,7 @@ public class ChessClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.data = new ChessData();
     }
 
     void startListener() {
@@ -49,7 +52,9 @@ public class ChessClient {
                 String[] splitArgs = arguments.split(" ");
                 switch ( request ) {
                     case NEW_COORD:
-
+                        System.out.println("sending coord");
+                        data.setCoord(splitArgs[1]);
+                        gui.update();
                 }
             }
             catch( NoSuchElementException nse ) {
@@ -66,11 +71,14 @@ public class ChessClient {
     }
 
     public void send_click(String coord){
-        this.networkOut.println(CLICK);
+        this.networkOut.println(CLICK + " " + coord);
         gui.update();
     }
 
 
+    public ChessData getData(){
+        return data;
+    }
 
 
 }

@@ -115,8 +115,9 @@ public class ChessGUI extends Application {
     }
 
 
-    private void refresh() {
 
+    private void refresh() {
+        pos.setText(client.getData().getCoord());
     }
 
 
