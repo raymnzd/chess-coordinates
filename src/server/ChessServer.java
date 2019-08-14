@@ -37,6 +37,10 @@ public class ChessServer {
             }
             System.out.println("Starting game!");
 
+            ChessGame game = new ChessGame(player_array);
+            new Thread(game).run();
+
+
         } catch (IOException e) {
             System.err.println("Something has gone horribly wrong!");
             e.printStackTrace();

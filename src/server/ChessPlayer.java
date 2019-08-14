@@ -1,9 +1,13 @@
 package server;
 
+import client.gui.ChessGUI;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
+
+import static common.ChessProtocol.*;
 
 public class ChessPlayer {
 
@@ -44,5 +48,10 @@ public class ChessPlayer {
 
     void connect() {
         printer.println("Welcome there are " + num_players + " players and you are player " +  player_number);
+    }
+
+
+    void send_new_coord(String coord){
+        printer.println(NEW_COORD + " " + coord);
     }
 }
