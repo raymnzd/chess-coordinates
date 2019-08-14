@@ -6,18 +6,24 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import static common.ChessProtocol.*;
+
+
 public class ChessClient {
 
     private Socket clientSocket;
     private Scanner networkIn;
     private PrintStream networkOut;
 
+    private ChessGUI gui;
 
-    public ChessClient(String host, int port){
+
+    public ChessClient(String host, int port, ChessGUI gui){
         try {
             this.clientSocket = new Socket(host, port);
             this.networkIn = new Scanner(clientSocket.getInputStream());
             this.networkOut = new PrintStream(clientSocket.getOutputStream());
+            this.gui = gui;
 
 
 
@@ -42,6 +48,7 @@ public class ChessClient {
                 String arguments = this.networkIn.nextLine();
                 String[] splitArgs = arguments.split(" ");
                 switch ( request ) {
+                    case NEW_COORD:
 
                 }
             }
@@ -58,6 +65,10 @@ public class ChessClient {
 
     }
 
+    public void send_click(String coord){
+        this.networkOut.println(CLICK);
+        gui.update();
+    }
 
 
 

@@ -3,12 +3,15 @@ package client.gui;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -20,7 +23,7 @@ public class ChessGUI extends Application {
     private GridPane gridPane;
     private BorderPane borderPane;
     private Label pos;
-    private String[] coords = {"A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8",
+    public static String[] coords = {"A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8",
                                 "A7", "B7", "C7", "D7", "E7", "F7", "G7", "H7",
                                 "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6",
                                 "A5", "B5", "C5", "D5", "E5", "F5", "G5", "H5",
@@ -41,7 +44,7 @@ public class ChessGUI extends Application {
         // get host info and port from command line
         String host = args.get(0);
         int port = Integer.parseInt(args.get(1));
-        client = new ChessClient(host,port);
+        client = new ChessClient(host,port, this);
     }
 
 
@@ -50,7 +53,9 @@ public class ChessGUI extends Application {
         borderPane = new BorderPane();
         gridPane = new GridPane();
         pos = new Label();
-        pos.setText("placeholder");
+        pos.setText("");
+
+        pos.setTextAlignment(TextAlignment.CENTER);
 
 
         boolean whiteTile = true;
@@ -66,7 +71,7 @@ public class ChessGUI extends Application {
 //                });
                 ImageView holeView = new ImageView(getTile(whiteTile));
                 holeView.setOnMouseClicked(e ->{
-                                        System.out.println(coords[c]);
+                                        this.client.send_click(coords[c]);
                 });
                 holeView.setFitHeight(50);
                 holeView.setFitWidth(50);
@@ -82,7 +87,8 @@ public class ChessGUI extends Application {
 
 
         borderPane.setTop(pos);
-        borderPane.setCenter(gridPane);
+        borderPane.setBottom(gridPane);
+        borderPane.setAlignment(pos, Pos.CENTER);
 
 
         stage.show();
@@ -110,7 +116,6 @@ public class ChessGUI extends Application {
 
 
     private void refresh() {
-
 
     }
 
