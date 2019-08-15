@@ -29,6 +29,7 @@ public class ChessPlayer {
 
     private int player_number;
 
+    private int score;
 
 
     public ChessPlayer(Socket sock, int num_players, int player_number){
@@ -37,6 +38,7 @@ public class ChessPlayer {
 
         this.num_players = num_players;
         this.player_number = player_number;
+        this.score = 0;
         try {
             scanner = new Scanner(sock.getInputStream());
             printer = new PrintStream(sock.getOutputStream());
@@ -56,7 +58,7 @@ public class ChessPlayer {
     }
 
 
-    public String test_whack(){
+    public String get_clicked(){
         while(scanner.hasNextLine()){
             String response = scanner.nextLine();
             if(response.startsWith(CLICK)){
@@ -73,5 +75,17 @@ public class ChessPlayer {
         catch(IOException ioe) {
             // squash
         }
+    }
+
+    public int getScore(){
+        return score;
+    }
+
+    public void addScore(){
+        score += 1;
+    }
+
+    public void subtractScore(){
+        score -=1;
     }
 }
