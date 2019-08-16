@@ -117,6 +117,7 @@ public class ChessGUI extends Application {
 
     private void refresh() {
         pos.setText(client.getData().getCoord());
+        score.setText("Score: " + client.getData().getScore());
     }
 
 

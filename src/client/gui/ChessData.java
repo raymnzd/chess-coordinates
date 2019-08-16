@@ -12,6 +12,7 @@ public class ChessData {
 
     private String coord;
 
+    private int score;
 
 
 
@@ -22,6 +23,15 @@ public class ChessData {
 
     public String getCoord(){
         return coord;
+    }
+
+
+    public void setScore(int score){
+        this.score = score;
+    }
+
+    public int getScore(){
+        return score;
     }
 
 
