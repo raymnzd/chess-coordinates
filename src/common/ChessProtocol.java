@@ -9,6 +9,7 @@ public interface ChessProtocol {
 
     public static final String NEW_COORD = "NEW";
 
+    public static final String SCORE = "SCORE";
 
 
 

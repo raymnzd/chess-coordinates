@@ -23,6 +23,7 @@ public class ChessGUI extends Application {
     private GridPane gridPane;
     private BorderPane borderPane;
     private Label pos;
+    private Label score;
     public static String[] coords = {"A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8",
                                 "A7", "B7", "C7", "D7", "E7", "F7", "G7", "H7",
                                 "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6",
@@ -57,6 +58,10 @@ public class ChessGUI extends Application {
 
         pos.setTextAlignment(TextAlignment.CENTER);
 
+        score = new Label();
+        score.setText("Score: 0");
+        score.setTextAlignment(TextAlignment.CENTER);
+
 
         boolean whiteTile = true;
 
@@ -64,11 +69,7 @@ public class ChessGUI extends Application {
 
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-//                Button tile = new Button();
                 int c = count;
-//                tile.setOnAction(e -> {
-//                    System.out.println(r + "," + c);
-//                });
                 ImageView holeView = new ImageView(getTile(whiteTile));
                 holeView.setOnMouseClicked(e ->{
                                         this.client.send_click(coords[c]);
@@ -85,15 +86,13 @@ public class ChessGUI extends Application {
 
         stage.setScene(new Scene(borderPane));
 
-
         borderPane.setTop(pos);
-        borderPane.setBottom(gridPane);
+        borderPane.setCenter(gridPane);
+        borderPane.setBottom(score);
         borderPane.setAlignment(pos, Pos.CENTER);
-
+        borderPane.setAlignment(score, Pos.CENTER);
 
         stage.show();
-
-
         client.startListener();
 
     }

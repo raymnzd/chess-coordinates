@@ -55,6 +55,9 @@ public class ChessClient {
                         System.out.println("sending coord");
                         data.setCoord(splitArgs[1]);
                         gui.update();
+                        break;
+                    case SCORE:
+                        System.out.println("sending score");
                 }
             }
             catch( NoSuchElementException nse ) {

@@ -37,7 +37,6 @@ public class ChessGame implements Runnable {
                     synchronized (foundspot) {
 
                         //Set the next spot for the player to click
-                        System.out.println("setting next spot");
                         setCurrent_coord();
                         foundspot.set(false);
                         for (ChessPlayer p : player_array) {
@@ -49,7 +48,6 @@ public class ChessGame implements Runnable {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            System.out.println("outoffound");
                         }
 
 
@@ -71,11 +69,18 @@ public class ChessGame implements Runnable {
                 public void run() {
                         while(true){
                             String spot_clicked = player_array[x].get_clicked();
-                            if(!spot_clicked.equals("") && spot_clicked.equals(getCurrent_coord())){
-                                System.out.println("Correct, you clicked on " + getCurrent_coord());
-                                foundspot.set(true);
-                                nxt();
+                            if(!spot_clicked.equals("")){
+                                if(spot_clicked.equals(getCurrent_coord())){
+                                    player_array[x].addScore();
+                                    System.out.println("Correct, you clicked on " + getCurrent_coord() + " . Your score is " + player_array[x].getScore());
+                                    foundspot.set(true);
+                                    nxt();
+                                }else{
+                                    player_array[x].subtractScore();
+                                    System.out.println("Wrong, you clicked on " + getCurrent_coord() + " . Your score is " + player_array[x].getScore());
+                                }
                             }
+
 
 
                         }
@@ -87,35 +92,12 @@ public class ChessGame implements Runnable {
             pt.start();
         }
 
-
-
 //        for(ChessPlayer p : player_array){
 //            p.close();
 //        }
 
 
     }
-
-
-
-//    public void wait_click(){
-//
-//        synchronized (found){
-//
-//            while(!found){
-//                for(ChessPlayer p : player_array){
-//                    String spot_clicked = p.test_whack();
-//                    if(!spot_clicked.equals("") && spot_clicked.equals(getCurrent_coord())){
-//                        System.out.println("Correct, you clicked on " + getCurrent_coord());
-//                        found = true;
-//
-//                    }
-//                }
-//
-//            }
-//            found.notifyAll();
-//        }
-//    }
 
 
 
@@ -134,11 +116,6 @@ public class ChessGame implements Runnable {
 
     public String getCurrent_coord(){
         return current_coord;
-    }
-
-
-    public boolean getFound(){
-        return found;
     }
 
 }
