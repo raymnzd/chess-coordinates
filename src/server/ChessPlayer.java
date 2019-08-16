@@ -49,7 +49,7 @@ public class ChessPlayer {
     }
 
     void connect() {
-        printer.println("Welcome there are " + num_players + " players and you are player " +  player_number);
+        printer.println(WELCOME + " there are " + num_players + " players and you are player " +  player_number);
     }
 
 

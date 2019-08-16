@@ -2,15 +2,12 @@ package client.gui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -33,10 +30,6 @@ public class ChessGUI extends Application {
                                 "A2", "B2", "C2", "D2", "E2", "F2", "G2", "H2",
                                 "A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"};
     private ChessClient client;
-
-
-
-
 
     public void init(){
         // get the command line args
@@ -106,13 +99,6 @@ public class ChessGUI extends Application {
             return tileImg;
         }
     }
-
-
-
-    public ChessGUI() {
-
-    }
-
 
 
     private void refresh() {

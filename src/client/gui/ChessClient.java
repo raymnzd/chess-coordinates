@@ -69,8 +69,6 @@ public class ChessClient {
             catch( Exception e ) {
 
             }
-
-
         }
 
     }

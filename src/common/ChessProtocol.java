@@ -3,15 +3,13 @@ package common;
 public interface ChessProtocol {
 
 
-    public static final String WELCOME =  "WELCOME";
+    String WELCOME =  "WELCOME";
 
-    public static final String CLICK = "CLICK";
+    String CLICK = "CLICK";
 
-    public static final String NEW_COORD = "NEW";
+    String NEW_COORD = "NEW";
 
-    public static final String SCORE = "SCORE";
-
-
+    String SCORE = "SCORE";
 
 }
 
