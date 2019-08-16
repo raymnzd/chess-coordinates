@@ -1,13 +1,11 @@
 package server;
 
-import client.gui.ChessGUI;
-
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-import static common.ChessProtocol.*;
+import static protocol.ChessProtocol.*;
 
 public class ChessPlayer {
 

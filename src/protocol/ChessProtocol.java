@@ -1,4 +1,4 @@
-package common;
+package protocol;
 
 public interface ChessProtocol {
 

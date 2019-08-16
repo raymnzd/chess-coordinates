@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import static common.ChessProtocol.*;
+import static protocol.ChessProtocol.*;
 
 
 public class ChessClient {
