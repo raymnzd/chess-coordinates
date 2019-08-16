@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+
 public class ChessServer {
 
 
@@ -13,17 +14,19 @@ public class ChessServer {
 
 
 
-    private ChessServer(int port){
+    private ChessServer(int port, int player_count){
         try {
             server = new ServerSocket(port);
         } catch (IOException e) {
 
         }
-        player_array = new ChessPlayer[player_count];
+        this.player_array = new ChessPlayer[player_count];
+        this.player_count = player_count;
     }
 
 
-    public void run() {
+    public void run(){
+
         try {
             for(int i = 0; i < player_count; i++) {
                 System.out.println("Waiting for player " + i + "...");
@@ -61,8 +64,8 @@ public class ChessServer {
         }
 
         int port = Integer.parseInt(args[0]);
-        player_count = Integer.parseInt(args[1]);
-        ChessServer server = new ChessServer(port);
+        int player_count = Integer.parseInt(args[1]);
+        ChessServer server = new ChessServer(port, player_count);
         server.run();
     }
 
