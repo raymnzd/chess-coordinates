@@ -58,6 +58,12 @@ public class ChessPlayer {
     }
 
 
+    void send_score(int score){
+        printer.println(SCORE + " " + score);
+    }
+
+
+
     public String get_clicked(){
         while(scanner.hasNextLine()){
             String response = scanner.nextLine();
@@ -88,4 +94,6 @@ public class ChessPlayer {
     public void subtractScore(){
         score -=1;
     }
+
+
 }
