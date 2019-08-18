@@ -66,6 +66,7 @@ public class ChessGUI extends Application {
 
         reverseButton = new Button("Reverse the board");
         reverseButton.setOnAction(e->reverse());
+        reverseButton.setMaxWidth(Double.MAX_VALUE);
 
 
         boolean whiteTile = true;
@@ -93,12 +94,14 @@ public class ChessGUI extends Application {
         stage.setScene(new Scene(borderPane));
 
 
-        HBox hbox = new HBox();
-        hbox.getChildren().addAll(pos,reverseButton);
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(score);
+        vbox.getChildren().addAll(reverseButton);
+        vbox.setAlignment(Pos.CENTER);
 
-        borderPane.setTop(hbox);
+        borderPane.setTop(pos);
         borderPane.setCenter(gridPane);
-        borderPane.setBottom(score);
+        borderPane.setBottom(vbox);
         borderPane.setAlignment(pos, Pos.CENTER);
         borderPane.setAlignment(score, Pos.CENTER);
 
@@ -142,10 +145,12 @@ public class ChessGUI extends Application {
         Collections.reverse(Arrays.asList(coords));
         int i = 0;
         for(Node node: gridPane.getChildren()){
+            int j = i;
             node.setOnMouseClicked(e ->{
-                System.out.println(coords[i]);
-                this.client.send_click(coords[i]);
+                System.out.println(coords[j]);
+                this.client.send_click(coords[j]);
             });
+            i+=1;
         }
     }
 
