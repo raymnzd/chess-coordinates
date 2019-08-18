@@ -70,15 +70,14 @@ public class ChessGame implements Runnable {
                         while(true){
                             String spot_clicked = player_array[x].get_clicked();
                             if(!spot_clicked.equals("")){
+                                System.out.println(spot_clicked);
                                 if(spot_clicked.equals(getCurrent_coord())){
                                     player_array[x].addScore();
-                                    System.out.println("Correct, you clicked on " + getCurrent_coord() + " . Your score is " + player_array[x].getScore());
                                     foundspot.set(true);
                                     player_array[x].send_score(player_array[x].getScore());
                                     nxt();
                                 }else{
                                     player_array[x].subtractScore();
-                                    System.out.println("Wrong, you clicked on " + getCurrent_coord() + " . Your score is " + player_array[x].getScore());
                                     player_array[x].send_score(player_array[x].getScore());
                                 }
                             }
