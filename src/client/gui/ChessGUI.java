@@ -3,7 +3,9 @@ package client.gui;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,6 +13,9 @@ import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -29,7 +34,9 @@ public class ChessGUI extends Application {
                                 "A3", "B3", "C3", "D3", "E3", "F3", "G3", "H3",
                                 "A2", "B2", "C2", "D2", "E2", "F2", "G2", "H2",
                                 "A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"};
+
     private ChessClient client;
+    private Button reverseButton;
 
     public void init(){
         // get the command line args
@@ -44,6 +51,8 @@ public class ChessGUI extends Application {
 
     @Override
     public void start(Stage stage){
+
+
         borderPane = new BorderPane();
         gridPane = new GridPane();
         pos = new Label();
@@ -55,6 +64,9 @@ public class ChessGUI extends Application {
         score.setText("Score: 0");
         score.setTextAlignment(TextAlignment.CENTER);
 
+        reverseButton = new Button("Reverse the board");
+        reverseButton.setOnAction(e->reverse());
+
 
         boolean whiteTile = true;
 
@@ -65,6 +77,7 @@ public class ChessGUI extends Application {
                 int c = count;
                 ImageView holeView = new ImageView(getTile(whiteTile));
                 holeView.setOnMouseClicked(e ->{
+                    System.out.println(coords[c]);
                                         this.client.send_click(coords[c]);
                 });
                 holeView.setFitHeight(50);
@@ -79,13 +92,21 @@ public class ChessGUI extends Application {
 
         stage.setScene(new Scene(borderPane));
 
-        borderPane.setTop(pos);
+
+        HBox hbox = new HBox();
+        hbox.getChildren().addAll(pos,reverseButton);
+
+        borderPane.setTop(hbox);
         borderPane.setCenter(gridPane);
         borderPane.setBottom(score);
         borderPane.setAlignment(pos, Pos.CENTER);
         borderPane.setAlignment(score, Pos.CENTER);
 
         stage.show();
+
+
+
+
         client.startListener();
 
     }
@@ -117,7 +138,20 @@ public class ChessGUI extends Application {
     }
 
 
+    public void reverse(){
+        Collections.reverse(Arrays.asList(coords));
+        int i = 0;
+        for(Node node: gridPane.getChildren()){
+            node.setOnMouseClicked(e ->{
+                System.out.println(coords[i]);
+                this.client.send_click(coords[i]);
+            });
+        }
+    }
+
+
     public static void main(String[] args){
+
         if (args.length != 2) {
             System.out.println("Usage: java ChessGUI host port");
             System.exit(-1);

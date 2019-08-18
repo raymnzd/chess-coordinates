@@ -52,12 +52,12 @@ public class ChessClient {
                 String[] splitArgs = arguments.split(" ");
                 switch ( request ) {
                     case NEW_COORD:
-                        System.out.println("getting coord");
+//                        System.out.println("getting coord");
                         data.setCoord(splitArgs[1]);
                         gui.update();
                         break;
                     case SCORE:
-                        System.out.println("getting score");
+//                        System.out.println("getting score");
                         data.setScore(Integer.parseInt(splitArgs[1]));
                         gui.update();
                 }
