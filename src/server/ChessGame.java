@@ -3,6 +3,7 @@ package server;
 import client.gui.ChessGUI;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ChessGame implements Runnable {
 
@@ -15,11 +16,14 @@ public class ChessGame implements Runnable {
     private Boolean found;
 
     private final AtomicBoolean foundspot = new AtomicBoolean();
+    private final AtomicInteger rounds;
 
-    public ChessGame(ChessPlayer[] player_array){
+
+    public ChessGame(ChessPlayer[] player_array, int rounds){
 
         this.current_coord = "";
         this.player_array = player_array;
+        this.rounds = new AtomicInteger(rounds);
         found = false;
         foundspot.set(false);
     }
@@ -32,7 +36,8 @@ public class ChessGame implements Runnable {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true) {
+                while(rounds.get() > 0) {
+                    System.out.println("ROUNDS IS " + rounds);
 
                     synchronized (foundspot) {
 
@@ -49,7 +54,7 @@ public class ChessGame implements Runnable {
                                 e.printStackTrace();
                             }
                         }
-
+                        rounds.decrementAndGet();
 
                     }
                 }
@@ -67,7 +72,8 @@ public class ChessGame implements Runnable {
             playerThreads[i] = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                        while(true){
+                        while(t.isAlive()){
+                            System.out.println(rounds.get() + " rounds.get");
                             String spot_clicked = player_array[x].get_clicked();
                             if(!spot_clicked.equals("")){
                                 System.out.println(spot_clicked);
@@ -93,6 +99,8 @@ public class ChessGame implements Runnable {
             pt.start();
         }
 
+
+
 //        for(ChessPlayer p : player_array){
 //            p.close();
 //        }
@@ -105,7 +113,6 @@ public class ChessGame implements Runnable {
     public void nxt(){
         synchronized (foundspot){
             foundspot.notifyAll();
-            System.out.println("notified");
         }
     }
 

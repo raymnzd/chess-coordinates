@@ -11,10 +11,10 @@ public class ChessServer {
     private ServerSocket server;
     private static int player_count;
     private ChessPlayer[] player_array;
+    private int rounds;
 
 
-
-    private ChessServer(int port, int player_count){
+    private ChessServer(int port, int player_count, int rounds){
         try {
             server = new ServerSocket(port);
         } catch (IOException e) {
@@ -22,6 +22,7 @@ public class ChessServer {
         }
         this.player_array = new ChessPlayer[player_count];
         this.player_count = player_count;
+        this.rounds = rounds;
     }
 
 
@@ -40,7 +41,7 @@ public class ChessServer {
             }
             System.out.println("Starting game!");
 
-            ChessGame game = new ChessGame(player_array);
+            ChessGame game = new ChessGame(player_array,rounds);
             Thread.sleep(2000);
             new Thread(game).run();
 
@@ -58,14 +59,16 @@ public class ChessServer {
 
     public static void main(String[] args){
 
-        if (args.length != 2) {
-            System.out.println("Usage: java ChessServer <port> <playercount>");
+        if (args.length != 3) {
+            System.out.println("Usage: java ChessServer <port> <playercount> <#rounds>");
             System.exit(5);
         }
 
         int port = Integer.parseInt(args[0]);
         int player_count = Integer.parseInt(args[1]);
-        ChessServer server = new ChessServer(port, player_count);
+        int rounds = Integer.parseInt(args[2]);
+
+        ChessServer server = new ChessServer(port, player_count, rounds);
         server.run();
     }
 
