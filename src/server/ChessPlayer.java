@@ -63,10 +63,15 @@ public class ChessPlayer {
 
 
     public String get_clicked(){
+        try{
             String response = scanner.nextLine();
             if(response.startsWith(CLICK)){
                 return response.split(" ")[1];
             }
+        }catch (Exception e){
+            return "";
+        }
+
         return "";
     }
 

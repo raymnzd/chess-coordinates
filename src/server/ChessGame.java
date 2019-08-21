@@ -32,6 +32,7 @@ public class ChessGame implements Runnable {
 
     @Override
     public void run() {
+        Thread[] playerThreads = new Thread[player_array.length];
 
         Thread t = new Thread(new Runnable() {
             @Override
@@ -58,6 +59,13 @@ public class ChessGame implements Runnable {
 
                     }
                 }
+                for(ChessPlayer p : player_array){
+                    p.close();
+                }
+                for(Thread x: playerThreads){
+                    x.interrupt();
+
+                }
 
             }
         });
@@ -65,8 +73,6 @@ public class ChessGame implements Runnable {
 
         t.start();
 
-
-        Thread[] playerThreads = new Thread[player_array.length];
         for(int i = 0; i < playerThreads.length; i++){
             int x = i;
             playerThreads[i] = new Thread(new Runnable() {
@@ -99,11 +105,6 @@ public class ChessGame implements Runnable {
             pt.start();
         }
 
-
-
-//        for(ChessPlayer p : player_array){
-//            p.close();
-//        }
 
 
     }
