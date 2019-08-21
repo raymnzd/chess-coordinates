@@ -13,8 +13,6 @@ public class ChessGame implements Runnable {
 
     private String current_coord;
 
-    private Boolean found;
-
     private final AtomicBoolean foundspot = new AtomicBoolean();
     private final AtomicInteger rounds;
 
@@ -24,7 +22,6 @@ public class ChessGame implements Runnable {
         this.current_coord = "";
         this.player_array = player_array;
         this.rounds = new AtomicInteger(rounds);
-        found = false;
         foundspot.set(false);
     }
 
