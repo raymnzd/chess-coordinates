@@ -79,9 +79,7 @@ public class ChessPlayer {
         try {
             sock.close();
         }
-        catch(IOException ioe) {
-            // squash
-        }
+        catch(IOException ioe) { }
     }
 
     public int getScore(){

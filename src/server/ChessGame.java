@@ -7,8 +7,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ChessGame implements Runnable {
 
-
-
     private ChessPlayer[] player_array;
 
     private String current_coord;
@@ -24,7 +22,6 @@ public class ChessGame implements Runnable {
         this.rounds = new AtomicInteger(rounds);
         foundspot.set(false);
     }
-
 
 
     @Override
@@ -102,11 +99,7 @@ public class ChessGame implements Runnable {
             pt.start();
         }
 
-
-
     }
-
-
 
     public void nxt(){
         synchronized (foundspot){
