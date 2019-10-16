@@ -21,10 +21,14 @@ import java.util.List;
 public class ChessGUI extends Application {
 
 
-    private GridPane gridPane;
-    private BorderPane borderPane;
-    private Label pos;
-    private Label score;
+    private GridPane gridPane; //to store the tiles
+    private BorderPane borderPane; //to format the gui panes
+    private Label pos; //coordinate to be clicked on
+    private Label score; //score of the player
+
+    /**
+     * holds all the coordinates of a chess board
+     */
     public static String[] coords = {"A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8",
                                 "A7", "B7", "C7", "D7", "E7", "F7", "G7", "H7",
                                 "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6",
@@ -34,8 +38,14 @@ public class ChessGUI extends Application {
                                 "A2", "B2", "C2", "D2", "E2", "F2", "G2", "H2",
                                 "A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"};
 
-    private ChessClient client;
-    private Button reverseButton;
+
+    private ChessClient client; //instance of the client
+    private Button reverseButton; //button to reverse the board (flip)
+
+    /**
+     * initializes host and port information
+     * creates an instance of the client
+     */
 
     public void init(){
         // get the command line args
@@ -48,6 +58,11 @@ public class ChessGUI extends Application {
     }
 
 
+    /**
+     * sets up how the gui looks like
+     * layout of tiles are inside a gridpane
+     * @param stage
+     */
     @Override
     public void start(Stage stage){
 
@@ -113,6 +128,12 @@ public class ChessGUI extends Application {
 
     }
 
+    /**
+     * gets Tile Image (white or black)
+     * @param b indicates which colored tile to get. (true == white, false == black)
+     * @return appropriate tile image based on boolean b
+     */
+
     public Image getTile(boolean b){
         if(b){
             Image tileImg = new Image(getClass().getResourceAsStream("white-tile.png"));
@@ -124,11 +145,19 @@ public class ChessGUI extends Application {
     }
 
 
+    /**
+     * updates the current coordinate to be clicked on
+     * updates the score
+     */
+
     private void refresh() {
         pos.setText(client.getData().getCoord());
         score.setText("Score: " + client.getData().getScore());
     }
 
+    /**
+     * calls for the gui to update
+     */
 
     public void update() {
         if ( Platform.isFxApplicationThread() ) {
@@ -139,7 +168,9 @@ public class ChessGUI extends Application {
         }
     }
 
-
+    /**
+     * reverse the coordinate tiles for the flipped board
+     */
     public void reverse(){
         Collections.reverse(Arrays.asList(coords));
         int i = 0;
@@ -153,6 +184,10 @@ public class ChessGUI extends Application {
         }
     }
 
+    /**
+     * Launches the program if command line args of host and port is given
+     * @param args
+     */
 
     public static void main(String[] args){
 
