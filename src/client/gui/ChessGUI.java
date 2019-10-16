@@ -1,3 +1,9 @@
+/**
+ * Class that serves as the VIEW (gui)
+ * @author Raymond Zhao
+ *
+ */
+
 package client.gui;
 
 import javafx.application.Application;
