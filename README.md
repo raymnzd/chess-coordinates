@@ -2,4 +2,5 @@
 Program designed to help memorize chess coordinates
 
 # dependencies
-* javafx 
+* java 11
+* javafx-sdk-11.0.1 
