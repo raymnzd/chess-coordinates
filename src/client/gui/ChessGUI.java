@@ -157,7 +157,7 @@ public class ChessGUI extends Application {
      */
 
     private void refresh() {
-        pos.setText(client.getData().getCoord());
+        pos.setText("Click on coordinate: " + client.getData().getCoord());
         score.setText("Score: " + client.getData().getScore());
     }
 
