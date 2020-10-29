@@ -4,3 +4,6 @@ Program designed to help memorize chess coordinates. By using this, your rating 
 # dependencies
 * java 11
 * javafx-sdk-11.0.1 
+
+# example
+![example](https://raw.githubusercontent.com/rayz/chess-coordinates/master/example.png)
